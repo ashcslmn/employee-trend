@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md row">
     <div class="col-12 col-md-6">
-      <q-badge color="secondary" class="q-mb-lg">
+      <q-badge color="purple" class="q-mb-lg">
         Workers: {{ workers.min }} to {{ workers.max }} (0 to 1000, step 50)
       </q-badge>
       <q-range
@@ -13,7 +13,7 @@
         color="purple"
       ></q-range>
       <div v-for="(q, i) in param.qualificationData" :key="i" class="q-mt-lg">
-        <q-badge align="top">{{ q.Label }}</q-badge>
+        <q-badge color="purple" align="top">{{ q.Label }}</q-badge>
         <div class="row q-gutter-sm">
           <q-input
             type="number"
@@ -29,59 +29,81 @@
           />
         </div>
       </div>
-      <q-badge align="top" class="q-mt-lg">Average Weekly Wage</q-badge>
+      <q-badge color="purple" align="top" class="q-mt-lg"
+        >Average Weekly Wage</q-badge
+      >
       <div
         v-for="(w, i) in param.averageWeeklyWageData"
         :key="i"
         class="q-mt-lg"
       >
-        <div class="row q-gutter-sm">
-          <q-slider
-            label
-            v-model="averageWeeklyWageData[i]"
-            :label-value="USDollar.format(averageWeeklyWageData[i])"
-            label-always
-            :min="0"
-            :max="3000"
-            color="purple"
-          />
-        </div>
+        <q-list>
+          <q-item>
+            <q-item-section avatar>{{ w.label }}</q-item-section>
+            <q-item-section>
+              <q-slider
+                label
+                v-model="averageWeeklyWageData[i]"
+                :label-value="USDollar.format(averageWeeklyWageData[i])"
+                label-always
+                :min="0"
+                :max="3000"
+                color="purple"
+              />
+            </q-item-section>
+          </q-item>
+        </q-list>
       </div>
-      <q-badge align="top" class="q-mt-lg">Average Age</q-badge>
+      <q-badge color="purple" align="top" class="q-mt-lg">Average Age</q-badge>
       <div v-for="(w, i) in param.averageAge" :key="i" class="q-mt-lg">
-        <div class="row q-gutter-sm">
-          <q-slider
-            label
-            v-model="averageAge[i]"
-            label-always
-            :min="0"
-            :max="100"
-            color="purple"
-          />
-        </div>
+        <q-list>
+          <q-item>
+            <q-item-section avatar>{{ w.label }}</q-item-section>
+            <q-item-section>
+              <q-slider
+                label
+                v-model="averageAge[i]"
+                label-always
+                :min="0"
+                :max="100"
+                color="purple"
+              />
+            </q-item-section>
+          </q-item>
+        </q-list>
       </div>
-      <q-badge align="top" class="q-mt-lg">Gender</q-badge>
+      <q-badge color="purple" align="top" class="q-mt-lg">Gender</q-badge>
       <div class="q-mt-lg">
-        <div class="row q-gutter-sm">
-          <q-slider
-            label
-            v-model="genderData.Men"
-            :label-value="genderData.Men + '%'"
-            label-always
-            :min="0"
-            :max="100"
-            color="purple"
-          />
-          <q-slider
-            label
-            v-model="genderData.Women"
-            :label-value="genderData.Women + '%'"
-            label-always
-            :min="0"
-            :max="100"
-            color="purple"
-          />
-        </div>
+        <q-list>
+          <q-item>
+            <q-item-section avatar>Men</q-item-section>
+            <q-item-section>
+              <q-slider
+                label
+                v-model="genderData.Men"
+                :label-value="genderData.Men + '%'"
+                label-always
+                :min="0"
+                :max="100"
+                color="purple"
+              />
+            </q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section avatar>Women</q-item-section>
+            <q-item-section>
+              <q-slider
+                label
+                v-model="genderData.Women"
+                :label-value="genderData.Women + '%'"
+                label-always
+                :min="0"
+                :max="100"
+                color="purple"
+              />
+            </q-item-section>
+          </q-item>
+        </q-list>
       </div>
     </div>
     <div class="col-12 col-md-6">
@@ -138,12 +160,12 @@ export default defineComponent({
         { Label: "Post Grad", Industry: 0.84, AllAustralia: 7.39 },
       ],
       averageWeeklyWageData: [
-        { color: "red", value: 1495, label: "" },
-        { color: "#8BCE23", value: 1394, label: "" },
+        { color: "red", value: 1495, label: "Industry" },
+        { color: "#8BCE23", value: 1394, label: "AllAustralia" },
       ],
       averageAge: [
-        { color: "red", value: 38, label: "" },
-        { color: "#8BCE23", value: 40, label: "" },
+        { color: "red", value: 38, label: "Industry" },
+        { color: "#8BCE23", value: 40, label: "AllAustralia" },
       ],
       genderData: { label: "Gender", Men: 95.3, Women: 4.7 },
     });
